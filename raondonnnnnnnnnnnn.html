@@ -1,0 +1,1826 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rondon Store</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#080808;
+    color:#fff;
+}
+
+/* =========================
+   TELA DE LOGIN
+========================= */
+
+#loginScreen{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    background:
+        linear-gradient(rgba(0,0,0,.72),rgba(0,0,0,.9)),
+        url("banner imperio.jpg") center/cover;
+}
+
+.login-box{
+    width:100%;
+    max-width:430px;
+    padding:40px 32px;
+    background:rgba(15,15,15,.94);
+    border:1px solid #c9a227;
+    border-radius:18px;
+    box-shadow:0 0 40px rgba(201,162,39,.2);
+    text-align:center;
+}
+
+.logo-login{
+    font-size:38px;
+    font-weight:900;
+    letter-spacing:3px;
+    color:#d4af37;
+    margin-bottom:8px;
+}
+
+.login-subtitle{
+    color:#ccc;
+    margin-bottom:28px;
+}
+
+.login-box input{
+    width:100%;
+    padding:15px;
+    margin-bottom:15px;
+    border-radius:9px;
+    border:1px solid #444;
+    background:#1a1a1a;
+    color:#fff;
+    outline:none;
+    font-size:15px;
+}
+
+.login-box input:focus{
+    border-color:#d4af37;
+}
+
+.login-btn{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:9px;
+    background:#d4af37;
+    color:#000;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.login-btn:hover{
+    background:#f0d264;
+    transform:translateY(-2px);
+}
+
+.login-options{
+    margin-top:18px;
+    color:#aaa;
+    font-size:13px;
+}
+
+.login-options span{
+    color:#d4af37;
+    cursor:pointer;
+}
+
+.login-error{
+    display:none;
+    color:#ff5757;
+    margin-bottom:15px;
+    font-size:14px;
+}
+
+/* =========================
+   LOJA
+========================= */
+
+#store{
+    display:none;
+}
+
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(8,8,8,.96);
+    border-bottom:1px solid #292929;
+    backdrop-filter:blur(10px);
+}
+
+.navbar{
+    max-width:1300px;
+    margin:auto;
+    min-height:75px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    padding:15px 25px;
+}
+
+.logo{
+    color:#d4af37;
+    font-size:27px;
+    font-weight:900;
+    letter-spacing:2px;
+}
+
+.nav-links{
+    display:flex;
+    gap:20px;
+    list-style:none;
+}
+
+.nav-links a{
+    color:#fff;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.nav-links a:hover{
+    color:#d4af37;
+}
+
+.header-actions{
+    display:flex;
+    gap:10px;
+}
+
+.header-btn{
+    border:1px solid #d4af37;
+    background:transparent;
+    color:#d4af37;
+    padding:10px 14px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.header-btn:hover{
+    background:#d4af37;
+    color:#000;
+}
+
+/* =========================
+   BANNER
+========================= */
+
+.hero{
+    min-height:500px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:50px 20px;
+    background:
+        linear-gradient(rgba(0,0,0,.48),rgba(0,0,0,.8)),
+        url("banner imperio.jpg") center/cover;
+}
+
+.hero-content{
+    max-width:800px;
+}
+
+.hero h1{
+    font-size:55px;
+    color:#fff;
+    margin-bottom:15px;
+    text-shadow:0 4px 20px #000;
+}
+
+.hero h1 span{
+    color:#d4af37;
+}
+
+.hero p{
+    font-size:20px;
+    color:#eee;
+    margin-bottom:25px;
+}
+
+.hero-btn{
+    display:inline-block;
+    background:#d4af37;
+    color:#000;
+    padding:15px 30px;
+    border-radius:9px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+/* =========================
+   PRODUTOS
+========================= */
+
+.products-section{
+    max-width:1300px;
+    margin:auto;
+    padding:60px 25px;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.section-title h2{
+    font-size:35px;
+    color:#d4af37;
+}
+
+.section-title p{
+    color:#aaa;
+    margin-top:8px;
+}
+
+.categories{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:35px;
+}
+
+.category-btn{
+    padding:11px 20px;
+    border:1px solid #555;
+    background:#151515;
+    color:#fff;
+    border-radius:20px;
+    cursor:pointer;
+}
+
+.category-btn.active,
+.category-btn:hover{
+    background:#d4af37;
+    color:#000;
+    border-color:#d4af37;
+}
+
+.products-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
+}
+
+.product{
+    background:#111;
+    border:1px solid #292929;
+    border-radius:14px;
+    overflow:hidden;
+    transition:.3s;
+}
+
+.product:hover{
+    transform:translateY(-6px);
+    border-color:#d4af37;
+    box-shadow:0 10px 30px rgba(212,175,55,.12);
+}
+
+.product img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+    background:#222;
+}
+
+.product-info{
+    padding:18px;
+}
+
+.product-info h3{
+    margin-bottom:8px;
+}
+
+.product-info p{
+    color:#aaa;
+    min-height:40px;
+}
+
+.price{
+    display:block;
+    color:#d4af37;
+    font-size:22px;
+    font-weight:bold;
+    margin:15px 0;
+}
+
+.add-cart{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:#d4af37;
+    color:#000;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.add-cart:hover{
+    background:#f1d56b;
+}
+
+/* =========================
+   CARRINHO
+========================= */
+
+.cart-panel{
+    position:fixed;
+    right:-420px;
+    top:0;
+    width:400px;
+    max-width:100%;
+    height:100vh;
+    background:#111;
+    z-index:3000;
+    border-left:1px solid #d4af37;
+    padding:25px;
+    transition:.3s;
+    overflow-y:auto;
+}
+
+.cart-panel.open{
+    right:0;
+}
+
+.cart-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.close-cart{
+    background:none;
+    border:none;
+    color:#fff;
+    font-size:28px;
+    cursor:pointer;
+}
+
+.cart-item{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    border-bottom:1px solid #333;
+    padding:15px 0;
+}
+
+.remove-item{
+    background:#8b2222;
+    color:#fff;
+    border:none;
+    padding:5px 8px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.cart-total{
+    font-size:22px;
+    font-weight:bold;
+    color:#d4af37;
+    margin:25px 0;
+}
+
+.checkout{
+    width:100%;
+    padding:14px;
+    border:none;
+    background:#25d366;
+    color:#fff;
+    border-radius:8px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* =========================
+   CHATBOT
+========================= */
+
+.chat-button{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    width:62px;
+    height:62px;
+    border-radius:50%;
+    border:2px solid #d4af37;
+    background:#111;
+    color:#d4af37;
+    font-size:27px;
+    cursor:pointer;
+    z-index:2500;
+    box-shadow:0 5px 25px rgba(0,0,0,.5);
+    transition:.3s;
+}
+
+.chat-button:hover{
+    transform:scale(1.08);
+    background:#d4af37;
+    color:#000;
+}
+
+.chat-box{
+    position:fixed;
+    right:25px;
+    bottom:100px;
+    width:360px;
+    max-width:calc(100% - 30px);
+    height:500px;
+    background:#111;
+    border:1px solid #d4af37;
+    border-radius:16px;
+    z-index:2500;
+    display:none;
+    flex-direction:column;
+    overflow:hidden;
+    box-shadow:0 15px 50px rgba(0,0,0,.6);
+}
+
+.chat-box.open{
+    display:flex;
+}
+
+.chat-header{
+    background:#d4af37;
+    color:#000;
+    padding:16px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-weight:bold;
+}
+
+.chat-close{
+    background:none;
+    border:none;
+    color:#000;
+    font-size:20px;
+    cursor:pointer;
+}
+
+.chat-messages{
+    flex:1;
+    overflow-y:auto;
+    padding:15px;
+}
+
+.message{
+    padding:10px 13px;
+    border-radius:12px;
+    margin-bottom:10px;
+    max-width:85%;
+    line-height:1.4;
+}
+
+.bot{
+    background:#252525;
+    color:#fff;
+    margin-right:auto;
+}
+
+.user{
+    background:#d4af37;
+    color:#000;
+    margin-left:auto;
+}
+
+.chat-options{
+    padding:10px;
+    border-top:1px solid #333;
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+.chat-option{
+    flex:1;
+    min-width:100px;
+    padding:9px;
+    border:1px solid #555;
+    background:#1b1b1b;
+    color:#fff;
+    border-radius:7px;
+    cursor:pointer;
+    font-size:12px;
+}
+
+.chat-option:hover{
+    border-color:#d4af37;
+    color:#d4af37;
+}
+
+/* =========================
+   BENEFÍCIOS
+========================= */
+
+.benefits{
+    background:#0e0e0e;
+    padding:55px 25px;
+}
+
+.benefits-grid{
+    max-width:1100px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+}
+
+.benefit{
+    text-align:center;
+    padding:25px;
+    background:#151515;
+    border:1px solid #292929;
+    border-radius:12px;
+}
+
+.benefit h3{
+    color:#d4af37;
+    margin:12px 0;
+}
+
+.benefit p{
+    color:#aaa;
+}
+
+footer{
+    padding:30px;
+    text-align:center;
+    color:#777;
+    border-top:1px solid #222;
+}
+
+.logout{
+    margin-top:10px;
+    color:#d4af37;
+    background:none;
+    border:none;
+    cursor:pointer;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media(max-width:800px){
+
+    .navbar{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .nav-links{
+        order:3;
+        width:100%;
+        justify-content:center;
+        flex-wrap:wrap;
+    }
+
+    .hero{
+        min-height:430px;
+    }
+
+    .hero h1{
+        font-size:38px;
+    }
+
+    .hero p{
+        font-size:17px;
+    }
+}
+
+@media(max-width:500px){
+
+    .login-box{
+        padding:30px 20px;
+    }
+
+    .logo-login{
+        font-size:30px;
+    }
+
+    .cart-panel{
+        width:100%;
+    }
+
+    .chat-box{
+        right:15px;
+        bottom:95px;
+        width:calc(100% - 30px);
+        height:470px;
+    }
+
+    .chat-button{
+        right:15px;
+        bottom:18px;
+    }
+
+    .hero h1{
+        font-size:31px;
+    }
+
+    .products-section{
+        padding:40px 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     LOGIN
+========================= -->
+
+<section id="loginScreen">
+
+    <div class="login-box">
+
+        <div class="logo-login">RONDON STORE</div>
+
+        <p class="login-subtitle">
+            Entre para acessar nossa loja
+        </p>
+
+        <div id="loginError" class="login-error">
+            Preencha todos os campos.
+        </div>
+
+        <input
+            type="text"
+            id="loginName"
+            placeholder="Seu nome"
+        >
+
+        <input
+            type="text"
+            id="loginContact"
+            placeholder="Gmail ou telefone"
+        >
+
+        <input
+            type="password"
+            id="loginPassword"
+            placeholder="Senha"
+        >
+
+        <button class="login-btn" onclick="entrar()">
+            ENTRAR NA LOJA
+        </button>
+
+        <div class="login-options">
+            Ainda não possui cadastro?
+            <span onclick="cadastro()">
+                Criar conta
+            </span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     LOJA
+========================= -->
+
+<div id="store">
+
+<header>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            RONDON STORE
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#produtos">Produtos</a></li>
+            <li><a href="#beneficios">Sobre</a></li>
+        </ul>
+
+        <div class="header-actions">
+
+            <button class="header-btn" onclick="abrirCarrinho()">
+                🛒 Carrinho
+                <span id="cartCount">0</span>
+            </button>
+
+            <button class="header-btn" onclick="sair()">
+                Sair
+            </button>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero" id="inicio">
+
+    <div class="hero-content">
+
+        <h1>
+            Olá, cliente!<br>
+            Seja muito bem-vindo ao
+            <span>Rondon Store</span>
+        </h1>
+
+        <p>
+            Moda, calçados e acessórios em um só lugar.
+        </p>
+
+        <a href="#produtos" class="hero-btn">
+            VER PRODUTOS
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- PRODUTOS -->
+
+<section class="products-section" id="produtos">
+
+    <div class="section-title">
+
+        <h2>Nossos Produtos</h2>
+
+        <p>
+            Encontre o produto ideal para você.
+        </p>
+
+    </div>
+
+
+    <div class="categories">
+
+        <button
+            class="category-btn active"
+            onclick="filtrar('todos',this)"
+        >
+            Todos
+        </button>
+
+        <button
+            class="category-btn"
+            onclick="filtrar('tenis',this)"
+        >
+            Tênis
+        </button>
+
+        <button
+            class="category-btn"
+            onclick="filtrar('chinelos',this)"
+        >
+            Chinelos
+        </button>
+
+        <button
+            class="category-btn"
+            onclick="filtrar('roupas',this)"
+        >
+            Roupas
+        </button>
+
+        <button
+            class="category-btn"
+            onclick="filtrar('acessorios',this)"
+        >
+            Acessórios
+        </button>
+
+    </div>
+
+
+    <div class="products-grid" id="productsGrid">
+
+        <!-- TÊNIS -->
+
+        <div class="product" data-category="tenis">
+
+            <img src="tenis adidas.jpg" alt="Tênis Adidas">
+
+            <div class="product-info">
+
+                <h3>Tênis Adidas</h3>
+
+                <p>Tênis originais.</p>
+
+                <span class="price">
+                    R$ 150,00
+                </span>
+
+                <button
+                    class="add-cart"
+                    onclick="adicionar('Tênis Adidas',150)"
+                >
+                    Adicionar ao carrinho
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="product" data-category="tenis">
+
+            <img src="tenis nike.jpg" alt="Tênis Nike Preto">
+
+            <div class="product-info">
+
+                <h3>Tênis Nike Preto</h3>
+
+                <p>Tênis originais.</p>
+
+                <span class="price">
+                    R$ 200,00
+                </span>
+
+                <button
+                    class="add-cart"
+                    onclick="adicionar('Tênis Nike Preto',200)"
+                >
+                    Adicionar ao carrinho
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="product" data-category="tenis">
+
+            <img
+                src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80"
+                alt="Tênis esportivo"
+            >
+
+            <div class="product-info">
+
+                <h3>Tênis Esportivo</h3>
+
+                <p>Modelo esportivo confortável.</p>
+
+                <span class="price">
+                    R$ 180,00
+                </span>
+
+                <button
+                    class="add-cart"
+                    onclick="adicionar('Tênis Esportivo',180)"
+                >
+                    Adicionar ao carrinho
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- CHINELOS -->
+
+        <div class="product" data-category="chinelos">
+
+            <img
+                src="https://images.unsplash.com/photo-1603487742131-4160ec999306?auto=format&fit=crop&w=800&q=80"
+                alt="Chinelo preto"
+            >
+
+            <div class="product-info">
+
+                <h3>Chinelo Preto</h3>
+
+                <p>Chinelo casual confortável.</p>
+
+                <span class="price">
+                    R$ 50,00
+                </span>
+
+                <button
+                    class="add-cart"
+                    onclick="adicionar('Chinelo Preto',50)"
+                >
+                    Adicionar ao carrinho
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="product" data-category="chinelos">
+
+            <img
+                src="https://images.unsplash.com/photo-1604001307862-2d953eee8a1a?auto=format&fit=crop&w=800&q=80"
+                alt="Chinelo casual"
+            >
+
+            <div class="product-info">
+
+                <h3>Chinelo Casual</h3>
+
+                <p>Leve e confortável para o dia a dia.</p>
+
+                <span class="price">
+                    R$ 45,00
+                </span>
+
+                <button
+                    class="add-cart"
+                    onclick="adicionar('Chinelo Casual',45)"
+                >
+                    Adicionar ao carrinho
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ROUPAS -->
+
+        <div class="product" data-category="roupas">
+
+            <img
+                src="camisa nike preta.jpg"
+                alt="Camiseta Nike Preta"
+            >
+
+            <div class="product-info">
+
+                <h3>Camiseta Nike Preta</h3>
+
+                <p>Tamanho M.</p>
+
+                <span class="price">
+                    R$ 250,00
+                </span>
+
+                <button
+                    class="add-cart"
+                    onclick="adicionar('Camiseta Nike Preta',250)"
+                >
+                    Adicionar ao carrinho
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="product" data-category="roupas">
+
+            <img
+                src="camisa termica.jpg"
+                alt="Blusa Térmica Nike"
+            >
+
+            <div class="product-info">
+
+                <h3>Blusa Térmica Nike</h3>
+
+                <p>Tamanho M.</p>
+
+                <span class="price">
+                    R$ 300,00
+                </span>
+
+                <button
+                    class="add-cart"
+                    onclick="adicionar('Blusa Térmica Nike',300)"
+                >
+                    Adicionar ao carrinho
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="product" data-category="roupas">
+
+            <img
+                src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80"
+                alt="Camiseta branca"
+            >
+
+            <div class="product-info">
+
+                <h3>Camiseta Nike Branca</h3>
+
+                <p>Tamanho M.</p>
+
+                <span class="price">
+                    R$ 200,00
+                </span>
+
+                <button
+                    class="add-cart"
+                    onclick="adicionar('Camiseta Nike Branca',200)"
+                >
+                    Adicionar ao carrinho
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="product" data-category="roupas">
+
+            <img
+                src="https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=800&q=80"
+                alt="Moletom"
+            >
+
+            <div class="product-info">
+
+                <h3>Moletom Casual</h3>
+
+                <p>Moletom confortável.</p>
+
+                <span class="price">
+                    R$ 220,00
+                </span>
+
+                <button
+                    class="add-cart"
+                    onclick="adicionar('Moletom Casual',220)"
+                >
+                    Adicionar ao carrinho
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="product" data-category="roupas">
+
+            <img
+                src="https://images.unsplash.com/photo-1506629905607-d9f9e9d3d6b0?auto=format&fit=crop&w=800&q=80"
+                alt="Calça"
+            >
+
+            <div class="product-info">
+
+                <h3>Calça Casual</h3>
+
+                <p>Modelo moderno e confortável.</p>
+
+                <span class="price">
+                    R$ 180,00
+                </span>
+
+                <button
+                    class="add-cart"
+                    onclick="adicionar('Calça Casual',180)"
+                >
+                    Adicionar ao carrinho
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ACESSÓRIOS -->
+
+        <div class="product" data-category="acessorios">
+
+            <img
+                src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=800&q=80"
+                alt="Relógio"
+            >
+
+            <div class="product-info">
+
+                <h3>Relógio Casual</h3>
+
+                <p>Relógio moderno.</p>
+
+                <span class="price">
+                    R$ 120,00
+                </span>
+
+                <button
+                    class="add-cart"
+                    onclick="adicionar('Relógio Casual',120)"
+                >
+                    Adicionar ao carrinho
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="product" data-category="acessorios">
+
+            <img
+                src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80"
+                alt="Mochila"
+            >
+
+            <div class="product-info">
+
+                <h3>Mochila Urbana</h3>
+
+                <p>Mochila para uso diário.</p>
+
+                <span class="price">
+                    R$ 140,00
+                </span>
+
+                <button
+                    class="add-cart"
+                    onclick="adicionar('Mochila Urbana',140)"
+                >
+                    Adicionar ao carrinho
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- BENEFÍCIOS -->
+
+<section class="benefits" id="beneficios">
+
+    <div class="section-title">
+
+        <h2>Por que comprar na Rondon Store?</h2>
+
+    </div>
+
+    <div class="benefits-grid">
+
+        <div class="benefit">
+
+            <div style="font-size:35px;">🚚</div>
+
+            <h3>Entrega</h3>
+
+            <p>
+                Produtos preparados para envio.
+            </p>
+
+        </div>
+
+
+        <div class="benefit">
+
+            <div style="font-size:35px;">💳</div>
+
+            <h3>Pagamento</h3>
+
+            <p>
+                Consulte as formas de pagamento disponíveis.
+            </p>
+
+        </div>
+
+
+        <div class="benefit">
+
+            <div style="font-size:35px;">🛍️</div>
+
+            <h3>Variedade</h3>
+
+            <p>
+                Tênis, chinelos, roupas e acessórios.
+            </p>
+
+        </div>
+
+
+        <div class="benefit">
+
+            <div style="font-size:35px;">💬</div>
+
+            <h3>Atendimento</h3>
+
+            <p>
+                Conte com nosso chatbot para tirar dúvidas.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <p>
+        © 2026 Rondon Store — Todos os direitos reservados.
+    </p>
+
+    <button class="logout" onclick="sair()">
+        Sair da conta
+    </button>
+
+</footer>
+
+</div>
+
+
+<!-- =========================
+     CARRINHO
+========================= -->
+
+<div class="cart-panel" id="cartPanel">
+
+    <div class="cart-header">
+
+        <h2>🛒 Seu Carrinho</h2>
+
+        <button
+            class="close-cart"
+            onclick="fecharCarrinho()"
+        >
+            ×
+        </button>
+
+    </div>
+
+    <div id="cartItems">
+        <p style="color:#888;">
+            Seu carrinho está vazio.
+        </p>
+    </div>
+
+    <div class="cart-total">
+        Total: R$ <span id="cartTotal">0,00</span>
+    </div>
+
+    <button class="checkout" onclick="finalizarCompra()">
+        FINALIZAR PELO WHATSAPP
+    </button>
+
+</div>
+
+
+<!-- =========================
+     CHATBOT
+========================= -->
+
+<button
+    class="chat-button"
+    onclick="toggleChat()"
+    aria-label="Abrir chatbot"
+>
+    💬
+</button>
+
+
+<div class="chat-box" id="chatBox">
+
+    <div class="chat-header">
+
+        <span>🤖 RondonIA</span>
+
+        <button
+            class="chat-close"
+            onclick="toggleChat()"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <div class="chat-messages" id="chatMessages">
+
+        <div class="message bot">
+            Olá! 👋 Seja bem-vindo à Rondon Store!<br><br>
+            Sou o RondonIA. Como posso ajudar?
+        </div>
+
+    </div>
+
+
+    <div class="chat-options">
+
+        <button
+            class="chat-option"
+            onclick="chatPergunta('produtos')"
+        >
+            🛍️ Produtos
+        </button>
+
+        <button
+            class="chat-option"
+            onclick="chatPergunta('precos')"
+        >
+            💰 Preços
+        </button>
+
+        <button
+            class="chat-option"
+            onclick="chatPergunta('tenis')"
+        >
+            👟 Tênis
+        </button>
+
+        <button
+            class="chat-option"
+            onclick="chatPergunta('roupas')"
+        >
+            👕 Roupas
+        </button>
+
+        <button
+            class="chat-option"
+            onclick="chatPergunta('chinelos')"
+        >
+            🩴 Chinelos
+        </button>
+
+        <button
+            class="chat-option"
+            onclick="chatPergunta('carrinho')"
+        >
+            🛒 Carrinho
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   LOGIN
+========================= */
+
+function entrar(){
+
+    const nome =
+        document.getElementById("loginName").value.trim();
+
+    const contato =
+        document.getElementById("loginContact").value.trim();
+
+    const senha =
+        document.getElementById("loginPassword").value.trim();
+
+    const erro =
+        document.getElementById("loginError");
+
+    if(!nome || !contato || !senha){
+
+        erro.style.display = "block";
+
+        erro.textContent =
+            "Preencha nome, Gmail/telefone e senha.";
+
+        return;
+    }
+
+    erro.style.display = "none";
+
+    localStorage.setItem(
+        "rondonUsuario",
+        nome
+    );
+
+    document.getElementById("loginScreen").style.display =
+        "none";
+
+    document.getElementById("store").style.display =
+        "block";
+
+    window.scrollTo(0,0);
+
+    adicionarMensagemBot(
+        "Olá, " + nome +
+        "! 👋 Seja muito bem-vindo ao Rondon Store."
+    );
+}
+
+
+function cadastro(){
+
+    alert(
+        "Cadastro demonstrativo ativado! " +
+        "Preencha seus dados acima e clique em ENTRAR NA LOJA."
+    );
+
+    document.getElementById("loginName").focus();
+}
+
+
+function sair(){
+
+    localStorage.removeItem("rondonUsuario");
+
+    document.getElementById("store").style.display =
+        "none";
+
+    document.getElementById("loginScreen").style.display =
+        "flex";
+
+    document.getElementById("loginPassword").value = "";
+
+    window.scrollTo(0,0);
+}
+
+
+/* =========================
+   FILTRO
+========================= */
+
+function filtrar(categoria, botao){
+
+    const produtos =
+        document.querySelectorAll(".product");
+
+    document
+        .querySelectorAll(".category-btn")
+        .forEach(btn =>
+            btn.classList.remove("active")
+        );
+
+    botao.classList.add("active");
+
+    produtos.forEach(produto => {
+
+        if(
+            categoria === "todos" ||
+            produto.dataset.category === categoria
+        ){
+
+            produto.style.display = "block";
+
+        }else{
+
+            produto.style.display = "none";
+
+        }
+
+    });
+}
+
+
+/* =========================
+   CARRINHO
+========================= */
+
+let carrinho = [];
+
+function adicionar(nome, preco){
+
+    const existente =
+        carrinho.find(item => item.nome === nome);
+
+    if(existente){
+
+        existente.quantidade++;
+
+    }else{
+
+        carrinho.push({
+            nome:nome,
+            preco:preco,
+            quantidade:1
+        });
+
+    }
+
+    atualizarCarrinho();
+
+    abrirCarrinho();
+}
+
+
+function atualizarCarrinho(){
+
+    const container =
+        document.getElementById("cartItems");
+
+    const contador =
+        document.getElementById("cartCount");
+
+    const totalElement =
+        document.getElementById("cartTotal");
+
+    container.innerHTML = "";
+
+    let total = 0;
+    let quantidadeTotal = 0;
+
+    if(carrinho.length === 0){
+
+        container.innerHTML =
+            '<p style="color:#888;">Seu carrinho está vazio.</p>';
+
+    }
+
+    carrinho.forEach((item,index)=>{
+
+        const subtotal =
+            item.preco * item.quantidade;
+
+        total += subtotal;
+
+        quantidadeTotal += item.quantidade;
+
+        const div =
+            document.createElement("div");
+
+        div.className = "cart-item";
+
+        div.innerHTML = `
+            <div>
+                <strong>${item.nome}</strong>
+                <br>
+                <small>
+                    ${item.quantidade}x
+                    R$ ${item.preco.toFixed(2).replace(".",",")}
+                </small>
+            </div>
+
+            <button
+                class="remove-item"
+                onclick="removerItem(${index})"
+            >
+                Remover
+            </button>
+        `;
+
+        container.appendChild(div);
+
+    });
+
+    contador.textContent =
+        quantidadeTotal;
+
+    totalElement.textContent =
+        total.toFixed(2).replace(".",",");
+}
+
+
+function removerItem(index){
+
+    carrinho.splice(index,1);
+
+    atualizarCarrinho();
+}
+
+
+function abrirCarrinho(){
+
+    document
+        .getElementById("cartPanel")
+        .classList.add("open");
+
+}
+
+
+function fecharCarrinho(){
+
+    document
+        .getElementById("cartPanel")
+        .classList.remove("open");
+
+}
+
+
+function finalizarCompra(){
+
+    if(carrinho.length === 0){
+
+        alert("Seu carrinho está vazio.");
+
+        return;
+    }
+
+    let mensagem =
+        "Olá! Gostaria de fazer um pedido na Rondon Store:%0A%0A";
+
+    let total = 0;
+
+    carrinho.forEach(item=>{
+
+        const subtotal =
+            item.preco * item.quantidade;
+
+        total += subtotal;
+
+        mensagem +=
+            `${item.quantidade}x ${item.nome} - R$ ${subtotal.toFixed(2)}%0A`;
+
+    });
+
+    mensagem +=
+        `%0ATotal: R$ ${total.toFixed(2)}`;
+
+    /*
+       Troque o número abaixo pelo WhatsApp
+       real da loja.
+    */
+
+    const telefone =
+        "5565999999999";
+
+    window.open(
+        "https://wa.me/" +
+        telefone +
+        "?text=" +
+        mensagem,
+        "_blank"
+    );
+}
+
+
+/* =========================
+   CHATBOT
+========================= */
+
+function toggleChat(){
+
+    document
+        .getElementById("chatBox")
+        .classList.toggle("open");
+
+}
+
+
+function adicionarMensagemUsuario(texto){
+
+    const mensagens =
+        document.getElementById("chatMessages");
+
+    const div =
+        document.createElement("div");
+
+    div.className =
+        "message user";
+
+    div.textContent =
+        texto;
+
+    mensagens.appendChild(div);
+
+    mensagens.scrollTop =
+        mensagens.scrollHeight;
+}
+
+
+function adicionarMensagemBot(texto){
+
+    const mensagens =
+        document.getElementById("chatMessages");
+
+    const div =
+        document.createElement("div");
+
+    div.className =
+        "message bot";
+
+    div.innerHTML =
+        texto;
+
+    mensagens.appendChild(div);
+
+    mensagens.scrollTop =
+        mensagens.scrollHeight;
+}
+
+
+function chatPergunta(tipo){
+
+    let pergunta = "";
+    let resposta = "";
+
+    if(tipo === "produtos"){
+
+        pergunta = "Quais produtos vocês vendem?";
+
+        resposta =
+            "Temos 👟 tênis, 🩴 chinelos, 👕 roupas e 🎒 acessórios. " +
+            "Você pode usar os filtros na seção de produtos para encontrar o que procura.";
+
+    }
+
+    if(tipo === "precos"){
+
+        pergunta = "Quais são os preços?";
+
+        resposta =
+            "Temos produtos a partir de R$ 45,00. " +
+            "Os preços aparecem diretamente nos cards dos produtos.";
+
+    }
+
+    if(tipo === "tenis"){
+
+        pergunta = "Quais tênis estão disponíveis?";
+
+        resposta =
+            "Atualmente temos Tênis Adidas por R$ 150,00, " +
+            "Tênis Nike Preto por R$ 200,00 e Tênis Esportivo por R$ 180,00.";
+
+    }
+
+    if(tipo === "roupas"){
+
+        pergunta = "Quais roupas estão disponíveis?";
+
+        resposta =
+            "Temos Camiseta Nike Preta, Blusa Térmica Nike, " +
+            "Camiseta Nike Branca, Moletom e Calça Casual.";
+
+    }
+
+    if(tipo === "chinelos"){
+
+        pergunta = "Vocês vendem chinelos?";
+
+        resposta =
+            "Sim! 🩴 Temos Chinelo Preto por R$ 50,00 " +
+            "e Chinelo Casual por R$ 45,00.";
+
+    }
+
+    if(tipo === "carrinho"){
+
+        pergunta = "Como funciona o carrinho?";
+
+        resposta =
+            "Clique em 'Adicionar ao carrinho' nos produtos que deseja. " +
+            "Depois, abra o carrinho para conferir os itens e o valor total.";
+
+    }
+
+    adicionarMensagemUsuario(pergunta);
+
+    setTimeout(()=>{
+
+        adicionarMensagemBot(resposta);
+
+    },500);
+}
+
+
+/* =========================
+   LOGIN AUTOMÁTICO
+========================= */
+
+window.addEventListener("load",()=>{
+
+    const usuario =
+        localStorage.getItem("rondonUsuario");
+
+    if(usuario){
+
+        document.getElementById("loginScreen").style.display =
+            "none";
+
+        document.getElementById("store").style.display =
+            "block";
+
+    }
+
+    atualizarCarrinho();
+
+});
+
+</script>
+
+</body>
+</html>
